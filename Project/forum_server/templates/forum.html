@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+        .header-info { display: flex; align-items: center; gap: 15px; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+        .logout-btn:hover { background: #dc2626; }
+        .msg-input { background: #1e293b; padding: 20px; border-radius: 12px; margin: 20px 0; }
+        input { width: 80%; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; }
+        .message { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #3b82f6; }
+        .user-tag { color: #3b82f6; font-weight: bold; margin-right: 10px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Internal Forum</h2>
+            <div class="header-info">
+                <span>Utente: <strong>{{ user }}</strong></span>
+                <a href="login" class="logout-btn">Log out</a>
+            </div>
+        </div>
+
+        <div class="msg-input">
+            <form method="POST">
+                <input type="text" name="message" placeholder="Condividi un aggiornamento..." required>
+                <button type="submit" style="padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">Invia</button>
+            </form>
+        </div>
+
+        <div id="feed">
+            {% for m in messages %}
+            <div class="message">
+                <span class="user-tag">{{ m.user }}</span>
+                <span>{{ m.content | safe }}</span> <!--va lasciato disattivato il controllo per testare le altre tech-->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+
